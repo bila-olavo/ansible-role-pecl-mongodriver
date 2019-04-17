@@ -1,0 +1,61 @@
+---
+
+# FIXME use pear module
+
+- name: install SSL libraries
+  apt:
+    name: "{{ item }}"
+    state: present
+    purge: false
+    default_release: stretch-backports
+    install_recommends: false
+    autoremove: false
+    allow_unauthenticated: false
+    dpkg_options: 'force-confdef,force-confold'
+  with_items:
+  - libssl-dev
+  - libssl1.0.0
+  - pkg-config
+  - php-pear
+  - libssl-doc
+  - php5-dev
+
+- name: set php.ini for PECL
+  shell: pecl config-set php_ini /etc/php.ini
+
+- name: discover default extensions directory
+  shell: php -i | grep -i '^extension_dir' | awk '{print $3}'
+  register: php_extension_dir
+
+- name: uninstall old MONGO drivers before continuing
+  shell: pecl uninstall mongo
+  ignore_errors: yes
+
+- name: install Mongo Driver
+  shell: printf "\n" | pecl install mongo
+  args:
+    creates: "{{php_extension_dir.stdout_lines[0]}}/mongo.so"
+
+- name: set Mongo Driver as executable
+  file:
+    path: "{{php_extension_dir.stdout_lines[0]}}/mongo.so"
+    mode: "0755"
+
+- name: add Mongo extension to PHP (HTTP)
+  lineinfile:
+    dest: /etc/php5/fpm/php.ini
+    line: "extension={{php_extension_dir.stdout_lines[0]}}/mongo.so"
+    state: present
+
+- name: add Mongo extension to PHP (CLI)
+  lineinfile:
+    dest: /etc/php5/cli/php.ini
+    line: "extension={{php_extension_dir.stdout_lines[0]}}/mongo.so"
+    state: present
+
+- name: commit to /etc repo
+  include: etckeeper.yaml
+  tags:
+  - pecl-mongodriver-etckeeper
+
+...

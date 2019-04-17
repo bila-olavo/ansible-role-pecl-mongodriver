@@ -1,0 +1,21 @@
+---
+
+galaxy_info:
+  author: Tom Goeller <thomas.goeller@project-collins.com>
+  contributors:
+  - Per H. <github.com/perfide>
+  description: Deploy PHP mongodriver with PECL
+  company: Project Collins GmbH
+  license: Apache License 2.0+ (FIXME unapproved)
+  min_ansible_version: 2.0
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+    - wheezy
+  galaxy_tags:
+  - mongo
+  - mongodb
+  - webscale
+
+...
