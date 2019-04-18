@@ -12,8 +12,8 @@
     allow_unauthenticated: false
     dpkg_options: 'force-confdef,force-confold'
   with_items:
-  - libssl-dev
-  - libssl1.0.0
+  - libssl-devlibssl-doc
+  - libssl1.0.1
   - pkg-config
   - php-pear
   - libssl-doc
