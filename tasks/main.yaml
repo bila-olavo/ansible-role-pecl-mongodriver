@@ -13,7 +13,7 @@
     dpkg_options: 'force-confdef,force-confold'
   with_items:
   - libssl-dev
-  - libssl1.0.1
+  - libssl1.1
   - pkg-config
   - php-pear
   - libssl-doc
