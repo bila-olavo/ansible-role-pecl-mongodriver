@@ -35,10 +35,10 @@
   - libssl1.1
   - pkg-config
   - libssl-doc
-  - php-pear
   - php5.6
   - php5.6-dev
   - php5.6-xml
+  - php-pear
 
 - name: set php.ini for PECL
   shell: pecl config-set php_ini /etc/php.ini
