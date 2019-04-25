@@ -2,6 +2,25 @@
 
 # FIXME use pear module
 
+# Adding Sury repo
+- block:
+  - name: Add packages.sury.org repository key
+    apt_key:
+      id: "15058500A0235D97F5D10063B188E2B695BD4743"
+      keyring: /etc/apt/trusted.gpg.d/php5.gpg
+      url: "{{ php5_apt_key_url }}"
+      state: present
+
+  - name: Add php5 repository
+    apt_repository:
+      repo: "deb {{ php5_repo_url }} {{ ansible_distribution_release }} main"
+      filename: "php5"
+
+  when: (ansible_distribution_release == "jessie") or
+        (ansible_distribution_release == "wheezy") or
+        (ansible_distribution_release == "stretch" and php5_version != '7.0')
+# end block
+
 - name: install SSL libraries
   apt:
     name: "{{ item }}"
