@@ -38,6 +38,7 @@
   - php-pear
   - php5.6-dev
   - php5.6-xml
+  - php-xml
 
 - name: set php.ini for PECL
   shell: pecl config-set php_ini /etc/php.ini
