@@ -34,6 +34,7 @@
   - libssl-dev
   - libssl1.1
   - pkg-config
+  - php5.6-fpm
   - php5.6-cli
   - php-pear
   - php5.6-dev
