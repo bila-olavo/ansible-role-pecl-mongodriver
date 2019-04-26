@@ -18,7 +18,7 @@
 
   when: (ansible_distribution_release == "jessie") or
         (ansible_distribution_release == "wheezy") or
-        (ansible_distribution_release == "stretch" and php5_version != '7.0')
+        (ansible_distribution_release == "stretch" and php7_version != '7.0')
 # end block
 
 - name: install SSL libraries
