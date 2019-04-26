@@ -36,9 +36,9 @@
   - pkg-config
   - php5.6-fpm
   - php5.6-cli
-  - php-pear
   - php5.6-dev
   - php5.6-xml
+  - php-pear
 
 - name: set php.ini for PECL
   shell: pecl config-set php_ini /etc/php.ini
